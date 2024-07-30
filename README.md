@@ -6,7 +6,6 @@
 Bulk Resume Scanner is a web application that uses Natural Language Processing (NLP) and machine learning to match resumes with job requirements. It automates the resume screening process, saving time and improving accuracy.
  
 # Usage
-[(Back to top)](#table-of-contents)
 
 - Resume Upload: Upload multiple resumes in PDF format
 - Skillset Input: Input job requirements and desired skillsets
