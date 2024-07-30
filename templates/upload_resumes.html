@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bulk Resume Scanner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .centered-box {
+            width: 700px;
+            height: 700px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .box-content {
+            width: 100%;
+        }
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="centered-box">
+                    <div class="card box-content">
+                        <div class="card-body">
+                            <h1 class="card-title text-center">Upload Resumes & Enter Job Skillsets </h1>
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="file" name="resumes" accept=".pdf" multiple class="form-control-file" id="resumeInput">
+                                    <div id="errMsg" style="color: red;"></div>
+                                </div>
+                                
+                                <script>
+                                    document.getElementById('resumeInput').addEventListener('change', function() {
+                                        var files = this.files;
+                                        var errMsg = document.getElementById('errMsg');
+                                        errMsg.innerHTML = ''; // Clear previous error message
+                                
+                                        for (var i = 0; i < files.length; i++) {
+                                            if (files[i].type !== 'application/pdf') {
+                                                errMsg.innerHTML = 'Only PDF files are allowed.';
+                                                this.value = ''; // Reset the input field
+                                                break;
+                                            }
+                                        }
+                                    });
+                                </script>
+                                <div class="form-group">
+                                    <textarea name="input_text" placeholder="Enter Custom Skill Like HTML, CSS, JS..." class="form-control" rows="5"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <select id="fields" class="form-control">
+                                        <option value="">Select Job Skills</option>
+                                        <!-- Development -->
+                                        <optgroup label="Development">
+                                            <option value="MERN">MERN</option>
+                                            <option value="MEAN">MEAN</option>
+                                            <option value="Software Developer">Software Developer</option>
+                                            <option value="Web Developer">Web Developer</option>
+                                            <option value="Mobile Developer">Mobile Developer</option>
+                                            <option value="DevOps Engineer">DevOps Engineer</option>
+                                            <option value="Cloud Engineer">Cloud Engineer</option>
+                                            <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+                                            <option value="Artificial Intelligence Engineer">Artificial Intelligence Engineer</option>
+                                            <option value="Blockchain Developer">Blockchain Developer</option>
+                                            <option value="Game Developer">Game Developer</option>
+                                        </optgroup>
+                                        <!-- Operations -->
+                                        <optgroup label="Operations">
+                                            <option value="IT Support Specialist">IT Support Specialist</option>
+                                            <option value="System Administrator">System Administrator</option>
+                                            <option value="Network Engineer">Network Engineer</option>
+                                            <option value="Cybersecurity Specialist">Cybersecurity Specialist</option>
+                                            <option value="IT Security Analyst">IT Security Analyst</option>
+                                            <option value="IT Auditor">IT Auditor</option>
+                                            <option value="IT Operations Manager">IT Operations Manager</option>
+                                        </optgroup>
+                                        <!-- Design -->
+                                        <optgroup label="Design">
+                                            <option value="UX/UI Designer">UX/UI Designer</option>
+                                            <option value="Technical Writer">Technical Writer</option>
+                                        </optgroup>
+                                        <!-- Data -->
+                                        <optgroup label="Data">
+                                            <option value="Data Scientist">Data Scientist</option>
+                                            <option value="Data Engineer">Data Engineer</option>
+                                            <option value="BI (Business Intelligence) Analyst">BI (Business Intelligence) Analyst</option>
+                                            <option value="Data Analyst">Data Analyst</option>
+                                        </optgroup>
+                                        <!-- Business -->
+                                        <optgroup label="Business">
+                                            <option value="Business Analyst">Business Analyst</option>
+                                            <option value="IT Project Manager">IT Project Manager</option>
+                                            <option value="IT Consultant">IT Consultant</option>
+                                            <option value="ERP Consultant">ERP Consultant</option>
+                                            <option value="CRM Specialist">CRM Specialist</option>
+                                            <option value="SEO Specialist">SEO Specialist</option>
+                                        </optgroup>
+                                        <!-- Other -->
+                                        <optgroup label="Other">
+                                            <option value="Technical Support">Technical Support</option>
+                                            <option value="QA Engineer">QA Engineer</option>
+                                            <option value="IT Asset Manager">IT Asset Manager</option>
+                                            <option value="Robotics Engineer">Robotics Engineer</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-primary">Upload and Match</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const fields = document.getElementById('fields');
+        const inputText = document.getElementsByName('input_text')[0];
+    
+        fields.addEventListener('change', () => {
+            const selectedField = fields.value;
+            let fieldSkills = '';
+    
+            switch (selectedField) {
+    case 'MERN':
+        fieldSkills = "MongoDB, Express.js, Angular, AngularJS, Node.js, JavaScript, HTML, CSS, RESTful APIs, JSON, Git, npm, Webpack, TypeScript, Mongoose, Jasmine, Karma, Gulp, Grunt, Agile, Scrum, Bootstrap, SASS, LESS, OAuth, JWT, Docker, Microservices, Cloud services, AWS, Azure, GCP, Continuous Integration, CI/CD, Webpack";
+        break;
+    case 'MEAN':
+        fieldSkills = "MongoDB, Express.js, Angular (or AngularJS for older versions), Node.js, JavaScript, HTML, CSS, RESTful APIs, JSON, Git, npm (Node Package Manager), Webpack, TypeScript, Mongoose, Jasmine or Karma (for testing), Gulp or Grunt, Agile/Scrum, Bootstrap, SASS or LESS, OAuth, JWT (JSON Web Token), Docker, Microservices, Cloud services (AWS, Azure, GCP), Continuous Integration (CI/CD)";
+        break;
+    case 'Data Scientist':
+        fieldSkills = "Python, R, SQL, Machine Learning, Deep Learning, TensorFlow, Keras, Scikit-Learn, Pandas, NumPy, Data Analysis, Data Visualization, Tableau, Power BI, Matplotlib, Seaborn, Big Data, Hadoop, Spark, ETL, Statistics, A/B Testing, Natural Language Processing (NLP), Jupyter Notebook, Git, Cloud services (AWS, Azure, GCP)";
+        break;
+    case 'Software Developer':
+        fieldSkills = "Java, Python, C#, C++, JavaScript, HTML, CSS, SQL, NoSQL, Git, GitHub, GitLab, RESTful APIs, Microservices, Docker, Kubernetes, Jenkins, Agile/Scrum, Spring Boot, .NET, Node.js, React, Angular, Vue.js, CI/CD, TDD (Test-Driven Development), Unit Testing, Integration Testing, JIRA, Eclipse, IntelliJ, Visual Studio";
+        break;
+    case 'Web Developer':
+        fieldSkills = "HTML, CSS, JavaScript, React, Angular, Vue.js, Node.js, Express.js, MongoDB, SQL, PHP, Laravel, Django, Ruby on Rails, RESTful APIs, JSON, Git, GitHub, Webpack, Babel, npm, Yarn, SASS, LESS, Bootstrap, Material-UI, Tailwind CSS, jQuery, AJAX, Responsive Design, Cross-Browser Compatibility, SEO, Accessibility, Firebase, AWS, GCP, Heroku";
+        break;
+    case 'Mobile Developer':
+        fieldSkills = "Java, Kotlin, Swift, Objective-C, Dart, Flutter, React Native, Android Studio, Xcode, Firebase, RESTful APIs, JSON, SQLite, Realm, Git, GitHub, UI/UX Design, Material Design, iOS Human Interface Guidelines, Push Notifications, In-App Purchases, Unit Testing, Integration Testing, Agile/Scrum, JIRA, Fastlane, Gradle, CocoaPods";
+        break;
+    case 'Technical Support':
+        fieldSkills = "Windows, macOS, Linux, Active Directory, Network Troubleshooting, TCP/IP, DNS, DHCP, VPN, Remote Desktop, Help Desk Software, Zendesk, ServiceNow, JIRA, Microsoft Office, Office 365, G Suite, Antivirus Software, Backup and Recovery, Scripting (Bash, PowerShell), Hardware Troubleshooting, Software Installation, Customer Service, Documentation";
+        break;
+    case 'DevOps Engineer':
+        fieldSkills = "Linux, Bash, Python, Jenkins, Docker, Kubernetes, Ansible, Puppet, Chef, Terraform, AWS, Azure, GCP, CI/CD, Git, GitHub, GitLab, Monitoring (Prometheus, Grafana, ELK Stack), Infrastructure as Code (IaC), Networking, Security, Scripting, Automation, CloudFormation, Helm, Microservices, Nginx, Apache, VPN, Agile/Scrum, JIRA";
+        break;
+    case 'Network Engineer':
+        fieldSkills = "TCP/IP, DNS, DHCP, Routing, Switching, Firewalls, VPN, MPLS, BGP, OSPF, Cisco, Juniper, Huawei, Network Security, Wireshark, SNMP, Network Monitoring, Network Troubleshooting, VLANs, QoS, NAT, IPv4, IPv6, Wireless Networking, Access Points, Load Balancers, Cloud Networking, AWS, Azure, GCP, SD-WAN, Network Automation, Python, Ansible, CCNA, CCNP";
+        break;
+    case 'Cybersecurity Specialist':
+        fieldSkills = "Network Security, Information Security, Firewalls, VPN, IDS/IPS, SIEM, Penetration Testing, Vulnerability Assessment, Ethical Hacking, Kali Linux, Metasploit, Wireshark, Security Auditing, Risk Assessment, Encryption, Public Key Infrastructure (PKI), SOC, Incident Response, Malware Analysis, Threat Hunting, Cyber Threat Intelligence, Compliance (ISO 27001, GDPR, HIPAA), Python, Bash, Cloud Security (AWS, Azure, GCP), Security Policies, Security Awareness Training, CISSP, CEH, CompTIA Security+";
+        break;
+    case 'Cloud Engineer':
+        fieldSkills = "AWS, Azure, GCP, CloudFormation, Terraform, Docker, Kubernetes, Jenkins, CI/CD, Linux, Windows Server, Networking, Security, Scripting (Python, Bash), IAM (Identity and Access Management), Monitoring (CloudWatch, Stackdriver), Logging, Autoscaling, Load Balancers, Serverless Architecture (Lambda, Functions), Databases (RDS, Cloud SQL, DynamoDB), Storage (S3, Blob Storage), DevOps, Git, GitHub, GitLab, Cost Management";
+        break;
+    case 'Database Administrator (DBA)':
+        fieldSkills = "SQL, NoSQL, MySQL, PostgreSQL, Oracle, SQL Server, MongoDB, Cassandra, Redis, Database Design, Data Modeling, Performance Tuning, Backup and Recovery, Replication, High Availability, Disaster Recovery, Security, Encryption, Stored Procedures, Triggers, Views, Indexing, Data Warehousing, ETL, Monitoring, Linux, Windows, Cloud Databases (AWS RDS, Azure SQL, GCP Cloud SQL), Scripting (Shell, Python), Automation, Git, GitHub";
+        break;
+    case 'System Administrator':
+        fieldSkills = "Linux, Windows Server, Active Directory, DNS, DHCP, TCP/IP, Network Configuration, Firewall Management, Scripting (Bash, PowerShell), Virtualization (VMware, Hyper-V), Cloud Services (AWS, Azure, GCP), Backup and Recovery, Monitoring (Nagios, Zabbix), Patch Management, Security, User Management, File Systems, RAID, SAN/NAS, Remote Desktop, VPN, Automation, Ansible, Puppet, Git, GitHub, Documentation, ITIL";
+        break;
+    case 'Business Analyst':
+        fieldSkills = "Requirements Gathering, Process Mapping, Data Analysis, SQL, Microsoft Excel, Microsoft PowerPoint, Tableau, Power BI, UML, BPMN, Agile/Scrum, JIRA, Confluence, Stakeholder Management, Business Process Improvement, Gap Analysis, SWOT Analysis, Use Case Development, User Stories, Prototyping, Wireframing, Workshops, Communication Skills, Presentation Skills, Problem-Solving, Project Management, Documentation";
+        break;
+    case 'IT Project Manager':
+        fieldSkills = "Project Planning, Project Scheduling, Risk Management, Budgeting, Resource Management, Agile, Scrum, Waterfall, Kanban, JIRA, Confluence, Microsoft Project, Trello, Asana, Communication Skills, Stakeholder Management, Team Leadership, Conflict Resolution, Change Management, Quality Assurance, Vendor Management, Documentation, Reporting, PMP, PRINCE2, Certified ScrumMaster (CSM), ITIL, Problem-Solving";
+        break;
+    case 'UX/UI Designer':
+        fieldSkills = "Adobe XD, Sketch, Figma, InVision, Adobe Photoshop, Adobe Illustrator, HTML, CSS, JavaScript, Responsive Design, User Research, Usability Testing, Wireframing, Prototyping, Interaction Design, Information Architecture, User Flows, Personas, Accessibility, Design Systems, UI Patterns, Agile/Scrum, Collaboration, Communication Skills, Creativity, Problem-Solving, Attention to Detail";
+        break;
+    case 'QA Engineer':
+        fieldSkills = "Manual Testing, Automated Testing, Selenium, JUnit, TestNG, Cypress, Postman, API Testing, Performance Testing, Load Testing, Regression Testing, Test Case Development, Test Plan Creation, Bug Tracking, JIRA, Quality Assurance, SDLC, STLC, Agile/Scrum, Git, GitHub, Jenkins, CI/CD, SQL, Scripting (Python, Bash), Communication Skills, Problem-Solving, Attention to Detail, ISTQB Certification";
+        break;
+    case 'Machine Learning Engineer':
+        fieldSkills = "Python, R, TensorFlow, Keras, PyTorch, Scikit-Learn, Machine Learning, Deep Learning, Neural Networks, Natural Language Processing (NLP), Computer Vision, Data Preprocessing, Feature Engineering, Model Deployment, Big Data, Hadoop, Spark, SQL, NoSQL, Git, GitHub, Docker, Kubernetes, Cloud Services (AWS, Azure, GCP), Jupyter Notebook, Data Visualization, Pandas, NumPy, Statistics, Mathematics, Experiment Tracking, MLFlow";
+        break;
+    case 'Artificial Intelligence Engineer':
+        fieldSkills = "Python, R, TensorFlow, PyTorch, Keras, OpenAI, Natural Language Processing (NLP), Machine Learning, Deep Learning, Reinforcement Learning, Computer Vision, Robotics, Data Analysis, Data Preprocessing, Feature Engineering, Cloud Services (AWS, Azure, GCP), Big Data, Hadoop, Spark, SQL, NoSQL, Docker, Kubernetes, Git, GitHub, Jupyter Notebook, Data Visualization, Mathematics, Statistics, Experiment Tracking, MLFlow, OpenCV, SciPy, Transformer Models";
+        break;
+    case 'Blockchain Developer':
+        fieldSkills = "Solidity, Ethereum, Hyperledger, Smart Contracts, Decentralized Applications (dApps), Web3.js, Truffle, Ganache, IPFS, Blockchain Architecture, Consensus Algorithms, Cryptography, Bitcoin, EOS, Stellar, Binance Smart Chain, Token Development, ERC-20, ERC-721, DeFi, NFTs, Solidity Testing, Remix IDE, Metamask, Git, GitHub, Docker, Kubernetes, Agile/Scrum, Security, Cloud Services (AWS, Azure, GCP), Scripting (Python, Bash)";
+        break;
+
+        case 'IT Security Analyst':
+                fieldSkills = "Network Security, Information Security, Firewalls, VPN, IDS/IPS, SIEM, Penetration Testing, Vulnerability Assessment, Ethical Hacking, Kali Linux, Metasploit, Wireshark, Security Auditing, Risk Assessment, Encryption, Public Key Infrastructure (PKI), SOC, Incident Response, Malware Analysis, Threat Hunting, Cyber Threat Intelligence, Compliance (ISO 27001, GDPR, HIPAA), Python, Bash, Cloud Security (AWS, Azure, GCP), Security Policies, Security Awareness Training, CISSP, CEH, CompTIA Security+, CISM";
+                break;
+            case 'IT Consultant':
+                fieldSkills = "IT Strategy, IT Governance, Business Analysis, Project Management, Systems Integration, Cloud Computing, Cybersecurity, Network Design, Data Management, ERP Systems, CRM Systems, ITIL, TOGAF, COBIT, Agile, Scrum, Waterfall, Risk Management, Compliance, Change Management, Vendor Management, Stakeholder Management, Communication Skills, Problem-Solving, Presentation Skills, Documentation, Business Process Improvement";
+                break;
+            case 'Data Engineer':
+                fieldSkills = "Python, Java, Scala, SQL, NoSQL, Apache Spark, Hadoop, Kafka, Airflow, ETL, Data Warehousing, Data Lakes, Big Data, Cloud Services (AWS, Azure, GCP), Databricks, Redshift, Snowflake, Google BigQuery, Data Modeling, Data Pipelines, Data Integration, Data Transformation, Docker, Kubernetes, Git, GitHub, Jenkins, CI/CD, Linux, Bash, Scripting";
+                break;
+            case 'ERP Consultant':
+                fieldSkills = "SAP, Oracle, Microsoft Dynamics, ERP Implementation, Business Process Analysis, Requirements Gathering, Data Migration, Customization, Configuration, Integration, Training, Change Management, Project Management, Agile, Waterfall, Risk Management, User Support, Documentation, Testing, Go-Live Support, Post-Implementation Support, Reporting, Communication Skills, Stakeholder Management";
+                break;
+            case 'IT Support Specialist':
+                fieldSkills = "Windows, macOS, Linux, Active Directory, Network Troubleshooting, TCP/IP, DNS, DHCP, VPN, Remote Desktop, Help Desk Software, Zendesk, ServiceNow, JIRA, Microsoft Office, Office 365, G Suite, Antivirus Software, Backup and Recovery, Scripting (Bash, PowerShell), Hardware Troubleshooting, Software Installation, Customer Service, Documentation, Technical Support, Problem-Solving, Communication Skills";
+                break;
+            case 'Robotics Engineer':
+                fieldSkills = "Python, C++, ROS (Robot Operating System), MATLAB, Simulink, Embedded Systems, Microcontrollers, Sensors, Actuators, Computer Vision, Machine Learning, Deep Learning, Kinematics, Dynamics, Control Systems, Robot Design, CAD (Computer-Aided Design), SolidWorks, 3D Printing, PCB Design, Git, GitHub, Hardware Prototyping, Real-Time Systems, Communication Protocols (I2C, SPI, UART), SLAM (Simultaneous Localization and Mapping)";
+                break;
+            case 'Game Developer':
+                fieldSkills = "C++, C#, Unity, Unreal Engine, Game Design, Game Physics, 3D Modeling, Animation, Blender, Maya, 3ds Max, Level Design, AI for Games, Graphics Programming, OpenGL, DirectX, Shader Programming, Git, GitHub, Version Control, Agile/Scrum, VR (Virtual Reality), AR (Augmented Reality), Mobile Game Development, Performance Optimization, Multiplayer Networking, Audio Programming, Script Writing";
+                break;
+            case 'IT Auditor':
+                fieldSkills = "IT Auditing, Risk Assessment, Compliance, Internal Controls, SOX (Sarbanes-Oxley Act), COBIT, ISO 27001, NIST, HIPAA, GDPR, PCI DSS, Security Auditing, Financial Auditing, Operational Auditing, Data Analysis, SQL, Excel, ACL, IDEA, Audit Planning, Documentation, Report Writing, Communication Skills, Problem-Solving, Critical Thinking, Ethical Standards, Project Management";
+                break;
+            case 'Technical Writer':
+                fieldSkills = "Technical Writing, Documentation, Content Management, Information Architecture, User Manuals, API Documentation, Software Documentation, Hardware Documentation, Editing, Proofreading, HTML, CSS, Markdown, DITA, XML, Content Management Systems (CMS), Microsoft Word, Adobe Acrobat, RoboHelp, MadCap Flare, Confluence, JIRA, Git, GitHub, Communication Skills, Attention to Detail, Technical Knowledge";
+                break;
+
+                case 'IT Trainer':
+    fieldSkills = "IT Training, Curriculum Development, Instructional Design, eLearning, Training Delivery, Classroom Training, Online Training, Learning Management Systems (LMS), Technical Writing, Microsoft Office, Office 365, G Suite, Programming Languages (Python, Java, C++), Cybersecurity, Network Administration, Cloud Computing, ITIL, Project Management, Communication Skills, Presentation Skills, Public Speaking, Assessment and Evaluation, Feedback Collection";
+    break;
+case 'CRM Specialist':
+    fieldSkills = "CRM Systems, Salesforce, Microsoft Dynamics, HubSpot, Zoho CRM, SugarCRM, Data Analysis, Customer Segmentation, Campaign Management, Lead Management, Sales Automation, Marketing Automation, Customer Support, Data Migration, Integration, Customization, Reporting, Dashboard Creation, User Training, Communication Skills, Problem-Solving, Technical Support, Documentation";
+    break;
+case 'SEO Specialist':
+    fieldSkills = "Search Engine Optimization (SEO), On-Page SEO, Off-Page SEO, Technical SEO, Keyword Research, Google Analytics, Google Search Console, SEMrush, Ahrefs, Moz, Link Building, Content Optimization, HTML, CSS, JavaScript, WordPress, CMS, Meta Tags, Schema Markup, Backlink Analysis, SEO Audits, Reporting, Competitor Analysis, PPC (Pay-Per-Click), SEM (Search Engine Marketing), Social Media Marketing, Content Marketing, Communication Skills";
+    break;
+case 'BI (Business Intelligence) Analyst':
+    fieldSkills = "Data Analysis, SQL, Power BI, Tableau, Data Visualization, Data Warehousing, ETL, OLAP, Data Modeling, Python, R, Excel, Reporting, Dashboard Creation, Business Analysis, Data Mining, Big Data, Hadoop, Spark, Cloud Services (AWS, Azure, GCP), Git, GitHub, Communication Skills, Problem-Solving, Critical Thinking, Documentation, Stakeholder Management";
+    break;
+case 'IT Asset Manager':
+    fieldSkills = "IT Asset Management, Asset Tracking, Inventory Management, Software Licensing, Hardware Procurement, Vendor Management, ITIL, CMDB (Configuration Management Database), Asset Lifecycle Management, Contract Management, Cost Management, Risk Management, Compliance, Auditing, Data Analysis, Reporting, Excel, Communication Skills, Project Management, Problem-Solving, Documentation, Negotiation Skills";
+    break;
+case 'IT Operations Manager':
+    fieldSkills = "IT Operations, ITIL, Incident Management, Change Management, Problem Management, Service Desk, Network Operations Center (NOC), Data Center Management, System Administration, Network Administration, Cloud Services (AWS, Azure, GCP), Disaster Recovery, Business Continuity, Monitoring, Automation, Scripting, Performance Management, Vendor Management, Budgeting, Project Management, Communication Skills, Leadership, Documentation";
+    break;
+    case 'Data Analyst':
+    fieldSkills = "Data Analysis, SQL, Excel, Data Visualization, Data Mining, Data Modeling, Python, R, Tableau, Power BI, Statistical Analysis, Data Interpretation, Business Intelligence, Data Warehousing, ETL, Data Quality, Data Governance, Machine Learning, Data Science, Communication Skills, Problem-Solving, Critical Thinking, Documentation, Stakeholder Management";
+    break;
+
+    default:
+        fieldSkills = "";
+        break;
+}
+
+    
+            inputText.value = fieldSkills;
+        });
+    </script>
+</body>
+</html>
